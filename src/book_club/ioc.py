@@ -11,7 +11,7 @@ from book_club.application.interactors import (
 )
 from book_club.config import Config
 from book_club.infrastructure.database import new_session_maker
-from book_club.infrastructure.repository import BookRepository
+from book_club.infrastructure.gateways import BookGateway
 
 
 class AppProvider(Provider):
@@ -28,20 +28,16 @@ class AppProvider(Provider):
     @provide(scope=Scope.REQUEST)
     async def get_session(self, session_maker: async_sessionmaker[AsyncSession]) -> AsyncIterable[AnyOf[
         AsyncSession,
-        interfaces.UoW,
+        interfaces.DBSession,
     ]]:
         async with session_maker() as session:
             yield session
 
-    @provide(scope=Scope.REQUEST)
-    def get_book_repo(
-            self,
-            session: AsyncSession,
-    ) -> AnyOf[
-        interfaces.BookReader,
-        interfaces.BookSaver,
-    ]:
-        return BookRepository(session)
+    book_gateway = provide(
+        BookGateway,
+        scope=Scope.REQUEST,
+        provides=AnyOf[interfaces.BookReader, interfaces.BookSaver]
+    )
 
     get_book_interactor = provide(GetBookInteractor, scope=Scope.REQUEST)
     create_new_book_interactor = provide(NewBookInteractor, scope=Scope.REQUEST)

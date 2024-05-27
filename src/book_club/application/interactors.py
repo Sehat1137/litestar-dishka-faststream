@@ -6,23 +6,23 @@ from book_club.domain import entities
 class GetBookInteractor:
     def __init__(
             self,
-            book_repo: interfaces.BookReader,
+            book_gateway: interfaces.BookReader,
     ) -> None:
-        self._book_repo = book_repo
+        self._book_gateway = book_gateway
 
     async def __call__(self, uuid: str) -> entities.BookDM | None:
-        return await self._book_repo.read_by_uuid(uuid)
+        return await self._book_gateway.read_by_uuid(uuid)
 
 
 class NewBookInteractor:
     def __init__(
             self,
-            uow: interfaces.UoW,
-            book_repo: interfaces.BookSaver,
+            db_session: interfaces.DBSession,
+            book_gateway: interfaces.BookSaver,
             uuid_generator: interfaces.UUIDGenerator,
     ) -> None:
-        self._uow = uow
-        self._book_repo = book_repo
+        self._db_session = db_session
+        self._book_gateway = book_gateway
         self._uuid_generator = uuid_generator
 
     async def __call__(self, dto: NewBookDTO) -> str:
@@ -34,6 +34,6 @@ class NewBookInteractor:
             is_read=dto.is_read
         )
 
-        await self._book_repo.save(book)
-        await self._uow.commit()
+        await self._book_gateway.save(book)
+        await self._db_session.commit()
         return uuid

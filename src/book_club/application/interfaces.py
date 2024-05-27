@@ -22,7 +22,7 @@ class UUIDGenerator(Protocol):
         ...
 
 
-class UoW(Protocol):
+class DBSession(Protocol):
     @abstractmethod
     async def commit(self) -> None:
         ...

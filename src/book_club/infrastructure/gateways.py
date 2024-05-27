@@ -5,7 +5,7 @@ from book_club.application.interfaces import BookReader, BookSaver
 from book_club.domain.entities import BookDM
 
 
-class BookRepository(
+class BookGateway(
     BookReader,
     BookSaver,
 ):

@@ -10,7 +10,6 @@ from book_club.controllers.http import HTTPBookController
 from book_club.infrastructure.broker import new_broker
 from book_club.ioc import AppProvider
 
-
 config = Config()
 container = make_async_container(AppProvider(), context={Config: config})
 

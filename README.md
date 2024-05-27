@@ -22,9 +22,7 @@ docker compose up -d
 Run migrations and creare queue
 
 ```shell
-set -a
-source .env
-set +a
+export $(grep -v '^#' .env | xargs)
 alembic upgrade head
 docker exec -it book-club-rabbitmq rabbitmqadmin -u $RABBITMQ_USER -p $RABBITMQ_PASS -V / declare queue name=create_book durable=false
 docker exec -it book-club-rabbitmq rabbitmqadmin -u $RABBITMQ_USER -p $RABBITMQ_PASS -V / declare queue name=book_statuses durable=false
@@ -33,12 +31,14 @@ docker exec -it book-club-rabbitmq rabbitmqadmin -u $RABBITMQ_USER -p $RABBITMQ_
 Run the project
 
 ```shell
+export $(grep -v '^#' .env | xargs)
 uvicorn --factory src.book_club.main:get_app --reload
 ```
 
 Workflow 
 
 ```shell
+export $(grep -v '^#' .env | xargs)
 // Publish message
 docker exec -it book-club-rabbitmq rabbitmqadmin -u $RABBITMQ_USER -p $RABBITMQ_PASS \
 publish exchange=amq.default routing_key=create_book payload='{"title": "The Brothers Karamazov", "pages": 928, "is_read": true}'
@@ -52,10 +52,12 @@ curl http://localhost:8000/book/{uuid}
 
 Run only http
 ```shell
+export $(grep -v '^#' .env | xargs)
 uvicorn --factory src.book_club.main:get_litestar_app --reload
 ```
 
 Run only amqp
 ```shell
+export $(grep -v '^#' .env | xargs)
 faststream --factory src.book_club.main:get_faststream_app --reload --host
 ```
