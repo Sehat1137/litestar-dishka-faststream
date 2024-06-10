@@ -1,0 +1,9 @@
+pydantic==2.7.0
+faststream[rabbit]==0.5.11
+dishka==1.2.0
+litestar==2.8.3
+uvicorn==0.28.0
+SQLAlchemy==2.0.28
+alembic==1.13.1
+psycopg==3.1.18
+watchfiles==0.22.0
