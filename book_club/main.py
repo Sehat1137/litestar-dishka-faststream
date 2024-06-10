@@ -4,11 +4,11 @@ from dishka.integrations import litestar as litestar_integration
 from faststream import FastStream
 from litestar import Litestar
 
-from src.book_club.config import Config
-from src.book_club.controllers.amqp import AMQPBookController
-from src.book_club.controllers.http import HTTPBookController
-from src.book_club.infrastructure.broker import new_broker
-from src.book_club.ioc import AppProvider
+from book_club.config import Config
+from book_club.controllers.amqp import AMQPBookController
+from book_club.controllers.http import HTTPBookController
+from book_club.infrastructure.broker import new_broker
+from book_club.ioc import AppProvider
 
 config = Config()
 container = make_async_container(AppProvider(), context={Config: config})

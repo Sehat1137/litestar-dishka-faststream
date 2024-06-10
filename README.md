@@ -32,7 +32,7 @@ Run the project
 
 ```shell
 export $(grep -v '^#' .env | xargs)
-uvicorn --factory src.book_club.main:get_app --reload
+uvicorn --factory book_club.main:get_app --reload
 ```
 
 Workflow 
@@ -53,11 +53,11 @@ curl http://localhost:8000/book/{uuid}
 Run only http
 ```shell
 export $(grep -v '^#' .env | xargs)
-uvicorn --factory src.book_club.main:get_litestar_app --reload
+uvicorn --factory book_club.main:get_litestar_app --reload
 ```
 
 Run only amqp
 ```shell
 export $(grep -v '^#' .env | xargs)
-faststream run --factory src.book_club.main:get_faststream_app --reload
+faststream run --factory book_club.main:get_faststream_app --reload
 ```

@@ -2,7 +2,7 @@ from abc import abstractmethod
 from typing import Protocol
 from uuid import UUID
 
-from src.book_club.domain.entities import BookDM
+from book_club.domain.entities import BookDM
 
 
 class BookSaver(Protocol):

@@ -1,8 +1,8 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.sql import text
 
-from src.book_club.application.interfaces import BookReader, BookSaver
-from src.book_club.domain.entities import BookDM
+from book_club.application.interfaces import BookReader, BookSaver
+from book_club.domain.entities import BookDM
 
 
 class BookGateway(

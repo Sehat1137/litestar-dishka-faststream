@@ -1,6 +1,6 @@
-from src.book_club.application import interfaces
-from src.book_club.application.dto import NewBookDTO
-from src.book_club.domain import entities
+from book_club.application import interfaces
+from book_club.application.dto import NewBookDTO
+from book_club.domain import entities
 
 
 class GetBookInteractor:
