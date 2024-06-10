@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 from sqlalchemy.ext.asyncio import create_async_engine
 
-from book_club.config import PostgresConfig
+from src.book_club.config import PostgresConfig
 
 
 def new_session_maker(psql_config: PostgresConfig) -> async_sessionmaker[AsyncSession]:

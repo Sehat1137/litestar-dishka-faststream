@@ -1,7 +1,7 @@
 from faststream.rabbit import RabbitBroker
 from faststream.security import SASLPlaintext
 
-from book_club.config import RabbitMQConfig
+from src.book_club.config import RabbitMQConfig
 
 
 def new_broker(rabbitmq_config: RabbitMQConfig) -> RabbitBroker:

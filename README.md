@@ -59,5 +59,5 @@ uvicorn --factory src.book_club.main:get_litestar_app --reload
 Run only amqp
 ```shell
 export $(grep -v '^#' .env | xargs)
-faststream --factory src.book_club.main:get_faststream_app --reload --host
+faststream run --factory src.book_club.main:get_faststream_app --reload
 ```

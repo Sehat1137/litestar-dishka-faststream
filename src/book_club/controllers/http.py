@@ -8,8 +8,8 @@ from litestar import Controller, route, HttpMethod
 from litestar.exceptions import HTTPException
 from litestar.params import Body
 
-from book_club.application.interactors import GetBookInteractor
-from book_club.controllers.schemas import BookSchema
+from src.book_club.application.interactors import GetBookInteractor
+from src.book_club.controllers.schemas import BookSchema
 
 
 class HTTPBookController(Controller):
